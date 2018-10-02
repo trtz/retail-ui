@@ -12,13 +12,8 @@
     <PackageReference Include="Kontur.RetryableAssertions" Version="0.0.1" />
     <PackageReference Include="Kontur.Selone" Version="0.0.4" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="2.0.1" />
+    <PackageReference Include="NUnit" Version="3.8.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.13.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\..\..\..\Users\polinaf93\.nuget\packages\nunit\3.8.0\lib\netstandard1.6\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
