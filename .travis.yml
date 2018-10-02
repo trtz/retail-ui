@@ -26,7 +26,7 @@ matrix:
     - cd ./packages/react-ui-testing/SeleniumTesting/TestPages
     - npm install
     - npm run install-versions
-    - npm start --env.specialIdForProcessKill="8ae78075-b41d-4cb5-bda6-1de5c329f05f"
+    - npm start --env.specialIdForProcessKill="8ae78075-b41d-4cb5-bda6-1de5c329f05f" &
     - cd ..
     addons:
        sauce_connect: true
