@@ -32,5 +32,5 @@ matrix:
     addons:
        sauce_connect: true
     script:
-    - dotnet build ./packages/react-ui-testing/SeleniumTesting
-    - dotnet test ./packages/react-ui-testing/SeleniumTesting/TestsCore/TestsCore.csproj
+    - dotnet build 
+    - dotnet test ./TestsCore/TestsCore.csproj
