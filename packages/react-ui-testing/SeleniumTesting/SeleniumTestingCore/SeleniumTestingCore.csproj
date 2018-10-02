@@ -15,4 +15,10 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.13.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\..\..\Users\polinaf93\.nuget\packages\nunit\3.8.0\lib\netstandard1.6\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

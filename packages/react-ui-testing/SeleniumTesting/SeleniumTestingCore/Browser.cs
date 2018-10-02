@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using Kontur.Selone.Extensions;
 using Microsoft.Win32;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
@@ -67,14 +68,20 @@ namespace SKBKontur.SeleniumTesting
             {
                 if (webDriver != null) return webDriver;
 
-                var assembliesDirectory = FindAssembliesDirectory();
-                var chromeDirectory = Path.Combine(assembliesDirectory, "Chrome");
-                var chromeExe = Path.Combine(chromeDirectory, "chrome.exe");
+                //TODO please supply your Sauce Labs user name in an environment variable
+                var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);
+                //TODO please supply your own Sauce Labs access Key in an environment variable
+                var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.User);
 
-                SetChromeVersionToRegistry(chromeExe);
+                ChromeOptions options = new ChromeOptions();
+                options.AddAdditionalCapability(CapabilityType.Version, "latest", true);
+                options.AddAdditionalCapability(CapabilityType.Platform, "Windows 10", true);
+                options.AddAdditionalCapability("username", sauceUserName, true);
+                options.AddAdditionalCapability("accessKey", sauceAccessKey, true);
+                options.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name, true);
 
-                var chromeDriverService = ChromeDriverService.CreateDefaultService(chromeDirectory);
-                webDriver = new ChromeDriver(chromeDriverService, GetChromeCapabilities(chromeExe));
+                webDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities(),
+                    TimeSpan.FromSeconds(600));
                 webDriver.Manage().Window.Size = new Size(1280, 1024);
                 return webDriver;
             }
