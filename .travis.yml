@@ -20,8 +20,10 @@ matrix:
     dotnet: 2.1
     install:
     - dotnet restore ./packages/react-ui-testing/SeleniumTesting
-    - cd ./packages/react-ui-testing/SeleniumTesting/TestPages
     - nvm install 8.12.0
+    - cd ./packages/react-ui-testing/SeleniumTesting
+    - npm install
+    - cd ./packages/react-ui-testing/SeleniumTesting/TestPages
     - npm install
     - npm run install-versions
     - npm start --env.specialIdForProcessKill="8ae78075-b41d-4cb5-bda6-1de5c329f05f"
