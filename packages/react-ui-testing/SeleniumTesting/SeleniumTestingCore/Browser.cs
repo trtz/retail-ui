@@ -69,9 +69,9 @@ namespace SKBKontur.SeleniumTesting
                 if (webDriver != null) return webDriver;
 
                 //TODO please supply your Sauce Labs user name in an environment variable
-                var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.User);
+                var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.Process);
                 //TODO please supply your own Sauce Labs access Key in an environment variable
-                var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.User);
+                var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.Process);
 
                 ChromeOptions options = new ChromeOptions();
                 options.AddAdditionalCapability(CapabilityType.Version, "latest", true);
