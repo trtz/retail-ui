@@ -74,7 +74,7 @@ namespace SKBKontur.SeleniumTesting
                 var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.Process);
 
                 ChromeOptions options = new ChromeOptions();
-                options.AddAdditionalCapability(CapabilityType.Version, "latest", true);
+                options.AddAdditionalCapability(CapabilityType.Version, "54", true);
                 options.AddAdditionalCapability(CapabilityType.Platform, "Windows 10", true);
                 options.AddAdditionalCapability("username", sauceUserName, true);
                 options.AddAdditionalCapability("accessKey", sauceAccessKey, true);
