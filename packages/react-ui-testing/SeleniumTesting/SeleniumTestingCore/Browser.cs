@@ -72,6 +72,7 @@ namespace SKBKontur.SeleniumTesting
                 var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.Process);
                 //TODO please supply your own Sauce Labs access Key in an environment variable
                 var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.Process);
+                var tunnelIdentifier = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER", EnvironmentVariableTarget.Process);
 
                 ChromeOptions options = new ChromeOptions();
                 options.AddAdditionalCapability(CapabilityType.Version, "54", true);
@@ -79,6 +80,7 @@ namespace SKBKontur.SeleniumTesting
                 options.AddAdditionalCapability("username", sauceUserName, true);
                 options.AddAdditionalCapability("accessKey", sauceAccessKey, true);
                 options.AddAdditionalCapability("name", TestContext.CurrentContext.Test.Name, true);
+                options.AddAdditionalCapability("tunnel-identifier", tunnelIdentifier, true);
                 options.AddAdditionalCapability("maxDuration", 10800, true);
 
                 webDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities(),
