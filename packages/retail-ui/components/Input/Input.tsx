@@ -47,6 +47,9 @@ export type InputProps = Override<
     value?: string;
     className?: undefined;
     capture?: boolean;
+
+    /** @ignore */
+    mainInGroup?: boolean;
   }
 >;
 
@@ -159,6 +162,7 @@ class Input extends React.Component<InputProps, InputState> {
       size,
       placeholder,
       disabled,
+      mainInGroup,
       ...rest
     } = this.props;
 
