@@ -5,9 +5,10 @@
   "main": "react-selenium-testing.js",
   "scripts": {
     "build": "babel react-selenium-testing.js -d Output/ --copy-files",
+    "installpages": "npm install --prefix TestPages && npm run install-versions --prefix TestPages",
     "sauce": "node sauce_connect.js",
-    "testpages": "npm install --prefix TestPages && npm run install-versions --prefix TestPages && npm start --prefix TestPages",
-    "start": "npm-run-all -p sauce testpages"
+    "testpages": "npm start --prefix TestPages",
+    "start": "npm-run-all -p -r sauce testpages"
   },
   "author": "",
   "license": "ISC",
