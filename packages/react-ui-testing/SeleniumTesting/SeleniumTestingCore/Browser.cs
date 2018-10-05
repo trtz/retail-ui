@@ -72,7 +72,8 @@ namespace SKBKontur.SeleniumTesting
                 var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.Process);
                 //TODO please supply your own Sauce Labs access Key in an environment variable
                 var sauceAccessKey = Environment.GetEnvironmentVariable("SAUCE_ACCESS_KEY", EnvironmentVariableTarget.Process);
-                var tunnelIdentifier = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER", EnvironmentVariableTarget.Process);
+                var tunnelIdentifier = Environment.GetEnvironmentVariable("TRAVIS_JOB_NUMBER", EnvironmentVariableTarget.Process) ??
+                                       Environment.MachineName;
 
                 ChromeOptions options = new ChromeOptions();
                 options.AddAdditionalCapability(CapabilityType.Version, "54", true);
