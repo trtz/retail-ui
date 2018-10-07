@@ -1,4 +1,8 @@
 import Link from "retail-ui/Link";
 import Icon from "retail-ui/Icon";
 
-() => <Link icon={<Icon name="Ok" />} />;
+props => (
+  <Link {...props}>
+    <Icon {...props} />
+  </Link>
+);
