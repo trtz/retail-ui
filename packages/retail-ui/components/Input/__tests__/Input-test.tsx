@@ -83,11 +83,12 @@ describe('<Input />', () => {
       .find('input')
       .props();
 
-    // tslint:disable-next-line:forin
     for (const prop in props) {
-      expect(inputProps[prop as keyof typeof inputProps]).toBe(
-        props[prop as keyof typeof props]
-      );
+      if (props[prop as keyof typeof props]) {
+        expect(inputProps[prop as keyof typeof props]).toBe(
+          props[prop as keyof typeof props]
+        );
+      }
     }
   });
 
