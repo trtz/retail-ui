@@ -2,6 +2,7 @@ var sauceConnectLauncher = require('sauce-connect-launcher');
 const uuidv1 = require('uuid/v1');
 var cmd = require('node-cmd')
 var os = require('os')
+var env = require('dotenv').config();
 
 const tunnelIdentifier = os.hostname();
 
