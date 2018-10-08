@@ -1,9 +1,10 @@
 # установка зависимостей
 ```
 npm install
-npm installpages
+npm run installpages
 ```
 # запуск тестовых страниц и sauce connect
+Необходимо создать файл *.env с переменными окружения для Sauce Labs и положить его в ./SeleniumTesting
 ```
 npm start
 ```
