@@ -2,7 +2,6 @@ module.exports = function(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
   const components = ["Icon", "Link", "Button", "MenuItem"];
-
   const iconNames = new Set();
 
   let preserveIconImport = false;
@@ -41,11 +40,11 @@ module.exports = function(file, api) {
           iconNames.add(consequentIconName);
           iconNames.add(alternateIconName);
 
-          const iconProps = path.node.attributes.slice(nameAttrIndex, 1);
           const iconNodeIndex = path.parent.parent.node.children.findIndex(
             child => child == path.parent.node
           );
 
+          path.node.attributes.splice(nameAttrIndex, 1);
           path.parent.parent.node.children[
             iconNodeIndex
           ] = j.jsxExpressionContainer(
@@ -54,21 +53,19 @@ module.exports = function(file, api) {
               j.jsxElement(
                 j.jsxOpeningElement(
                   j.jsxIdentifier(`${consequentIconName}Icon`),
-                  iconProps,
+                  path.node.attributes,
                   true
                 )
               ),
               j.jsxElement(
                 j.jsxOpeningElement(
                   j.jsxIdentifier(`${alternateIconName}Icon`),
-                  iconProps,
+                  path.node.attributes,
                   true
                 )
               )
             )
           );
-          // Add icons
-          // replace path
         } else {
           preserveIconImport = true;
         }
@@ -78,14 +75,43 @@ module.exports = function(file, api) {
         );
         const iconAttr = path.node.attributes[iconAttrIndex];
 
-        if (iconAttr && iconAttr.value.type == "Literal") {
-          const iconName = iconAttr.value.value;
+        if (!iconAttr) return;
+
+        if (
+          iconAttr.value.type == "Literal" ||
+          iconAttr.value.expression.type == "Literal"
+        ) {
+          const iconName =
+            iconAttr.value.value || iconAttr.value.expression.value;
           iconNames.add(iconName);
 
-          // replace
           iconAttr.value = j.jsxExpressionContainer(
             j.jsxElement(
               j.jsxOpeningElement(j.jsxIdentifier(`${iconName}Icon`), [], true)
+            )
+          );
+        } else if (
+          iconAttr.value.expression.type == "ConditionalExpression" &&
+          iconAttr.value.expression.consequent.type == "Literal" &&
+          iconAttr.value.expression.alternate.type == "Literal"
+        ) {
+          const consequentIconName = iconAttr.value.expression.consequent.value;
+          const alternateIconName = iconAttr.value.expression.alternate.value;
+          iconNames.add(consequentIconName);
+          iconNames.add(alternateIconName);
+
+          iconAttr.value.expression.consequent = j.jsxElement(
+            j.jsxOpeningElement(
+              j.jsxIdentifier(`${consequentIconName}Icon`),
+              [],
+              true
+            )
+          );
+          iconAttr.value.expression.alternate = j.jsxElement(
+            j.jsxOpeningElement(
+              j.jsxIdentifier(`${alternateIconName}Icon`),
+              [],
+              true
             )
           );
         }
