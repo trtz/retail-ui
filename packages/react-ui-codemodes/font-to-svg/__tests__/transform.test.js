@@ -6,4 +6,11 @@ jest.autoMockOff();
 fs.readdirSync(path.join(__dirname, "../__testfixtures__"))
   .filter(filename => filename.endsWith(".input.js"))
   .map(filename => filename.replace(".input.js", ""))
-  .forEach(test => defineTest(__dirname, "transform", null, test));
+  .forEach(test => {
+    defineTest(__dirname, "transform", null, test);
+    describe("transform", () => {
+      it(`transforms correctly using "${test}" data`, () => {
+        // transform ts
+      });
+    });
+  });
