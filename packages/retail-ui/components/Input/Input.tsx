@@ -48,7 +48,10 @@ export type InputProps = Override<
     className?: undefined;
     capture?: boolean;
 
-    /** @ignore */
+    /**
+     * @deprecated
+     * 100% ширина в группе, лучше явно передать ширину в компонент
+     */
     mainInGroup?: boolean;
   }
 >;
