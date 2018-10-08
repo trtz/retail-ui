@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using dotenv.net;
 using Kontur.Selone.Extensions;
 using Microsoft.Win32;
 using NUnit.Framework;
@@ -67,6 +68,8 @@ namespace SKBKontur.SeleniumTesting
             get
             {
                 if (webDriver != null) return webDriver;
+
+                DotEnv.Config();
 
                 //TODO please supply your Sauce Labs user name in an environment variable
                 var sauceUserName = Environment.GetEnvironmentVariable("SAUCE_USERNAME", EnvironmentVariableTarget.Process);
