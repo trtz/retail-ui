@@ -24,6 +24,7 @@ matrix:
     - dotnet restore
     - nvm install 8.12.0
     - npm install
+    - npm run installpages
     - npm run testpages &
     addons:
        sauce_connect: true
